@@ -19,8 +19,8 @@ io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("send-message", (message) => {
-    console.log("new message",message);
-    
+    // console.log("new message",message);
+
     // for sending message to all
     socket.broadcast.emit("receive-message", message);
   });
@@ -28,5 +28,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(3001, () => {
-  console.log("SERVER IS RUNNING");
+  console.log("SERVER IS RUNNING in 3001");
 });
