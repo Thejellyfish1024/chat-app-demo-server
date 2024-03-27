@@ -49,10 +49,15 @@ const client = new MongoClient(uri, {
 
 const database = client.db('chatDemo');
 const chatCollection = database.collection('chats');
+const userCollection = database.collection('users');
 
 
 
 app.get('/all-chats', async (req, res) => {
+  const result = await chatCollection.find().toArray()
+  res.send(result)
+})
+app.get('/user/id', async (req, res) => {
   const result = await chatCollection.find().toArray()
   res.send(result)
 })
@@ -61,6 +66,12 @@ app.post('/new-chat', async (req, res) => {
   const newChat = req?.body;
   console.log("hitting message", newChat);
   const result = await chatCollection?.insertOne(newChat);
+  res.send(result)
+})
+app.post('/users', async (req, res) => {
+  const user = req?.body;
+  console.log("hitting user", user);
+  const result = await userCollection?.insertOne(user);
   res.send(result)
 })
 
